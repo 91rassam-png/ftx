@@ -1,0 +1,462 @@
+/* ============================================================
+   THE DESK — 디자인 토큰
+   색상: 잉크빛 네이비 배경 + 브라스(놋쇠) 앰버 브랜드 컬러
+        (Bloomberg 단말기의 브라스 틱 계기판에서 착안)
+   애널리스트별 컬러: Taro=차트블루 / Smith=브라스골드 / Nova=바이올렛 / Kirk=코랄핑크
+   타이포: Big Shoulders Display(브랜드/라벨, 콘덴스드 볼드) · IBM Plex Mono(데이터/숫자)
+          · IBM Plex Sans KR(본문 한글)
+   ============================================================ */
+:root {
+  --bg: #0E1116;
+  --bg-raised: #151920;
+  --panel: #171B22;
+  --panel-2: #1E232C;
+  --border: #2A303A;
+  --border-soft: #21262F;
+  --text: #E9E7DD;
+  --text-dim: #8B909B;
+  --text-faint: #565C67;
+
+  --amber: #E8A33D;
+  --amber-dim: #8A6A34;
+
+  --bull: #3FB68B;
+  --bull-bg: rgba(63, 182, 139, 0.12);
+  --bear: #E85D4A;
+  --bear-bg: rgba(232, 93, 74, 0.12);
+  --neutral: #8B909B;
+  --neutral-bg: rgba(139, 144, 155, 0.1);
+
+  --taro: #5AA9E6;
+  --smith: #E8A33D;
+  --nova: #B98AE3;
+  --kirk: #E8709E;
+
+  --radius: 3px;
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-kr: 'IBM Plex Sans KR', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(90,169,230,0.06), transparent),
+    radial-gradient(ellipse 900px 500px at 85% 0%, rgba(232,163,61,0.05), transparent);
+  color: var(--text);
+  font-family: var(--font-kr);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+::selection { background: var(--amber); color: #14120F; }
+
+a { color: var(--amber); }
+
+/* ---------- 상단 티커 테이프 ---------- */
+.tape-wrap {
+  background: #0A0C10;
+  border-bottom: 1px solid var(--border-soft);
+  overflow: hidden;
+  height: 44px;
+}
+.tv-ticker-tape { height: 44px; }
+
+/* ---------- 마스트헤드 ---------- */
+.masthead {
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg-raised), var(--bg));
+}
+.masthead-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  color: var(--amber);
+  font-size: 22px;
+  line-height: 1;
+  transform: rotate(0deg);
+}
+.brand-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+.ticker-form {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--panel);
+}
+.ticker-form input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  padding: 12px 16px;
+  width: 220px;
+}
+.ticker-form input::placeholder { color: var(--text-faint); }
+.ticker-form button {
+  background: var(--amber);
+  border: none;
+  color: #14120F;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  padding: 0 22px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.ticker-form button:hover { background: #F2B457; }
+.ticker-form button:disabled { background: var(--amber-dim); cursor: wait; }
+
+/* ---------- 레이아웃 ---------- */
+.layout {
+  max-width: 1400px;
+  margin: 28px auto;
+  padding: 0 28px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "chart chart"
+    "desks desks"
+    "research verdict";
+  gap: 22px;
+}
+.chart-panel { grid-area: chart; }
+.desk-panel { grid-area: desks; }
+.research-panel { grid-area: research; }
+.verdict-panel { grid-area: verdict; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.panel-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+}
+.panel-label-sym { color: var(--amber); margin-left: auto; }
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 6px var(--amber);
+}
+
+/* ---------- 차트 패널 ---------- */
+.tv-chart-container { height: 460px; }
+.chart-placeholder {
+  height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* ---------- 데스크(애널리스트) 패널 ---------- */
+.desks {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-soft);
+}
+.desk-card {
+  background: var(--panel);
+  padding: 18px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 260px;
+  position: relative;
+}
+.desk-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.desk-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+.led {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--text-faint);
+  flex-shrink: 0;
+}
+.led.analyzing {
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
+  animation: pulse 1.1s ease-in-out infinite;
+}
+.led.done-bull { background: var(--bull); box-shadow: 0 0 8px var(--bull); }
+.led.done-bear { background: var(--bear); box-shadow: 0 0 8px var(--bear); }
+.led.done-neutral { background: var(--neutral); box-shadow: 0 0 6px var(--neutral); }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+.desk-role {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.desk-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+
+.view-badge {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.view-badge.bullish { background: var(--bull-bg); color: var(--bull); }
+.view-badge.bearish { background: var(--bear-bg); color: var(--bear); }
+.view-badge.neutral { background: var(--neutral-bg); color: var(--neutral); }
+
+.confidence-row {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint);
+}
+.confidence-bar {
+  flex: 1; height: 4px; background: var(--border-soft); border-radius: 2px; overflow: hidden;
+}
+.confidence-fill { height: 100%; border-radius: 2px; }
+
+.desk-summary {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.55;
+}
+.desk-points {
+  margin: 0; padding-left: 16px;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.desk-points li { margin-bottom: 2px; }
+
+/* 애널리스트별 강조색 (좌측 바) */
+.desk-card::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--accent-color, var(--border));
+}
+.desk-card[data-analyst="Taro"] { --accent-color: var(--taro); }
+.desk-card[data-analyst="Smith"] { --accent-color: var(--smith); }
+.desk-card[data-analyst="Nova"] { --accent-color: var(--nova); }
+.desk-card[data-analyst="Kirk"] { --accent-color: var(--kirk); }
+
+/* ---------- 리서치 패널 ---------- */
+.research-body { padding: 20px; }
+.empty-state {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  text-align: center;
+  padding: 40px 10px;
+  line-height: 1.9;
+}
+.stance-row {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+}
+.stance-badge {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.stance-badge.bull { color: var(--bull); }
+.stance-badge.bear { color: var(--bear); }
+.stance-badge.mixed { color: var(--amber); }
+
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.case-col {
+  background: var(--panel-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.case-col-title {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.case-col.bull-col .case-col-title { color: var(--bull); }
+.case-col.bear-col .case-col-title { color: var(--bear); }
+.case-col ul { margin: 0; padding-left: 16px; font-size: 12.5px; color: var(--text); line-height: 1.7; }
+
+.disagreement {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: rgba(232,163,61,0.06);
+  border-left: 2px solid var(--amber-dim);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+.research-summary {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ---------- 판결(Ace) 패널 ---------- */
+.verdict-body { padding: 24px 20px; }
+.decision-word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 46px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.decision-word.buy { color: var(--bull); }
+.decision-word.sell { color: var(--bear); }
+.decision-word.hold { color: var(--amber); }
+
+.decision-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-bottom: 18px;
+}
+
+.gauge-row { margin-bottom: 14px; }
+.gauge-label {
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.gauge-track { height: 6px; background: var(--border-soft); border-radius: 3px; overflow: hidden; }
+.gauge-fill { height: 100%; background: var(--amber); border-radius: 3px; }
+
+.verdict-reasoning {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.7;
+  margin: 16px 0;
+}
+.verdict-section-title {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin: 16px 0 6px;
+}
+.verdict-body ul { margin: 0; padding-left: 16px; font-size: 12.5px; color: var(--text-dim); line-height: 1.7; }
+.invalidation {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: var(--panel-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-top: 6px;
+}
+.disclaimer-line {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-faint);
+  margin-top: 18px;
+  line-height: 1.6;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 12px;
+}
+
+/* ---------- 푸터 ---------- */
+.site-footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  padding: 24px 20px 40px;
+}
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "chart" "desks" "research" "verdict";
+  }
+  .desks { grid-template-columns: 1fr 1fr; }
+  .case-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .desks { grid-template-columns: 1fr; }
+  .ticker-form input { width: 140px; }
+  .decision-word { font-size: 36px; }
+  .masthead-inner { padding: 18px 16px; }
+  .layout { padding: 0 14px 40px; margin-top: 16px; }
+}
+
+/* 키보드 포커스 표시 */
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .led.analyzing { animation: none; }
+}
