@@ -77,7 +77,7 @@ class Kirk(BaseAnalyst):
     role_description = "커뮤니티/투자자 심리 분석 (게시판 반응, 관심도, 극단적 낙관/비관 신호)"
 
     def gather_data(self, ticker: str, company_name: str = "") -> dict:
-        return {"community_posts": ds.get_community_sentiment(ticker, company_name)}
+        return ds.get_community_sentiment(ticker, company_name)
 
 
 ALL_ANALYSTS = [Taro(), Smith(), Nova(), Kirk()]
